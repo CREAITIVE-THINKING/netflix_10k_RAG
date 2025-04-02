@@ -137,6 +137,8 @@ Please create an S3 source connector for the Netflix 10K document with these set
 - Set recursive to true
 ```
 
+After creation, you'll receive a source ID that looks like: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
+
 #### Create Destination Connector
 ```
 Now create a Pinecone destination connector with these settings:
@@ -145,12 +147,14 @@ Now create a Pinecone destination connector with these settings:
 - Namespace: netflix-10k
 ```
 
+After creation, you'll receive a destination ID that looks like: `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`
+
 #### Create Processing Workflow
 ```
 Create a custom workflow with the following configuration:
 - Name: netflix-10k-processing
-- Source ID: [ID from the source connector creation]
-- Destination ID: [ID from the destination connector creation]
+- Source ID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+- Destination ID: yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
 - Workflow type: custom
 - Workflow nodes:
   1. Partitioner node:
@@ -169,17 +173,27 @@ Create a custom workflow with the following configuration:
      - Type: embed
      - Subtype: openai
      - Settings:
-       - Model name: text-embedding-3-small
+       - Model name: text-embedding-3-large
 ```
+
+After creation, you'll receive a workflow ID that looks like: `zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz`
 
 #### Run the Workflow
 ```
-Please run the workflow with ID: [Your workflow ID]
+Please run the workflow with ID: zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
 ```
 
-### Reference Workflow Job ID
+After running, you'll receive a job ID that looks like: `jjjjjjjj-jjjj-jjjj-jjjj-jjjjjjjjjjjj`
 
-The example workflow used for this application has job ID: `613b0159-9de1-4500-96aa-24b8e7cef741`
+### Reference Workflow
+
+We've created a custom workflow that:
+1. Uses VLM-based partitioning with Claude 3.5 Sonnet
+2. Chunks documents by title with a 1000 character limit and 100 character overlap
+3. Embeds content using OpenAI's text-embedding-3-small model
+4. Stores the processed data in Pinecone
+
+This workflow effectively converts the raw Netflix 10-K PDF into a queryable vector database.
 
 ## Usage
 
@@ -208,7 +222,7 @@ The application uses several configuration parameters that can be modified in th
 
 - If you encounter authentication issues, verify your API keys in the `.env` file
 - For workflow errors, check the job status in Unstructured Platform UI
-- If embeddings are not working correctly, verify your Pinecone index dimensions match the embedding model (1536 for text-embedding-3-small)
+- If embeddings are not working correctly, verify your Pinecone index dimensions match the embedding model (3072 for text-embedding-3-large)
 - If the application fails to connect to Pinecone, check your environment settings and index configuration
 - For AWS S3 connectivity issues:
   - Verify your AWS credentials in the `.env` file
