@@ -69,7 +69,19 @@ This section explains how we processed the Netflix 10K filing using Unstructured
 - Pinecone account for vector database storage
 - Python 3.9+ installed on your system
 
-### Step 1: Set Up the Unstructured MCP Server
+### Step 1: Set Up AWS S3 Bucket and Credentials
+
+Before setting up the Unstructured MCP server, you'll need to set up an AWS S3 bucket to store your documents. Unstructured has an excellent tutorial video on this process:
+
+[Unstructured Tutorial: How to Set Up AWS Credentials and S3 Buckets](https://www.youtube.com/watch?v=hyDHfhVVAhs&t=24s)
+
+The tutorial covers:
+- Creating an AWS account if you don't have one
+- Setting up an S3 bucket for document storage
+- Creating IAM credentials with appropriate permissions
+- Configuring your environment with AWS credentials
+
+### Step 2: Set Up the Unstructured MCP Server
 
 1. Clone the official Unstructured MCP server repository:
    ```bash
@@ -88,6 +100,10 @@ This section explains how we processed the Netflix 10K filing using Unstructured
    ```
    UNSTRUCTURED_API_KEY="your-unstructured-api-key"
    PINECONE_API_KEY="your-pinecone-api-key"
+   AWS_ACCESS_KEY_ID="your-aws-access-key"
+   AWS_SECRET_ACCESS_KEY="your-aws-secret-key"
+   AWS_REGION="your-aws-region"
+   FIRECRAWL_API_KEY="your-firecrawl-api-key"  # Optional, only if using Firecrawl
    ```
 
 4. Configure Claude Desktop to discover your MCP server:
@@ -108,7 +124,7 @@ This section explains how we processed the Netflix 10K filing using Unstructured
    ```
    - Restart Claude Desktop
 
-### Step 2: Process the Netflix 10K Document
+### Step 3: Process the Netflix 10K Document
 
 1. Upload the Netflix 10K PDF to a storage location (like an S3 bucket)
 2. Open Claude Desktop and use the following prompts to create the workflow:
@@ -194,6 +210,11 @@ The application uses several configuration parameters that can be modified in th
 - For workflow errors, check the job status in Unstructured Platform UI
 - If embeddings are not working correctly, verify your Pinecone index dimensions match the embedding model (1536 for text-embedding-3-small)
 - If the application fails to connect to Pinecone, check your environment settings and index configuration
+- For AWS S3 connectivity issues:
+  - Verify your AWS credentials in the `.env` file
+  - Check that your IAM user has the necessary permissions (S3FullAccess or appropriate custom policy)
+  - Ensure your S3 bucket has the correct permissions set
+  - If using a specific region, make sure it's correctly specified in your AWS_REGION variable
 
 ## Contributing
 
@@ -216,6 +237,8 @@ The application uses several configuration parameters that can be modified in th
 - [Model Context Protocol Documentation](https://docs.anthropic.com/claude/docs/model-context-protocol-mcp)
 - [Pinecone Documentation](https://docs.pinecone.io/)
 - [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
+- [AWS S3 Documentation](https://docs.aws.amazon.com/s3/)
+- [AWS IAM Documentation](https://docs.aws.amazon.com/iam/)
 
 ## License
 
