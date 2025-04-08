@@ -139,7 +139,7 @@ Please create an S3 source connector for the Netflix 10K document with these set
 
 After creation, you'll receive a source ID that looks like: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
-#### Create Destination Connector
+#### Create Destination Connector (make sure to setup up the index in Pinecone first)
 ```
 Now create a Pinecone destination connector with these settings:
 - Name: netflix-10k-pinecone
