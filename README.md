@@ -200,7 +200,7 @@ This workflow effectively converts the raw Netflix 10-K PDF into a queryable vec
 1. Enter your question about Netflix's 10-K filing in the text input
 2. Use the sidebar filters to focus on specific sections or years
 3. View the answer and supporting sources from the document
-4. Explore financial visualizations when available
+4. Explore financial visualizations when available (still WIP)
 
 ## Project Structure
 
