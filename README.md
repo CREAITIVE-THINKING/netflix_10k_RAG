@@ -189,7 +189,7 @@ After running, you'll receive a job ID that looks like: `jjjjjjjj-jjjj-jjjj-jjjj
 
 We've created a custom workflow that:
 1. Uses VLM-based partitioning with Claude 3.5 Sonnet
-2. Chunks documents by title with a 1000 character limit and 100 character overlap
+2. Chunks documents by title with a 1000 character limit and 200 character overlap
 3. Embeds content using OpenAI's text-embedding-3-large model
 4. Stores the processed data in Pinecone
 
