@@ -2,6 +2,8 @@
 
 An interactive application for exploring and analyzing Netflix's 10-K filings using RAG (Retrieval Augmented Generation) technology.
 
+**Important Note:** This repository contains my previous custom RAG implementation, but I now recommend using Unstructured's MCP (Model Context Protocol) for document processing. You'll only need the Streamlit portion of this code combined with the Unstructured MCP workflow described below.
+
 ## Features
 
 * Semantic search through Netflix's 10-K filings
@@ -13,12 +15,12 @@ An interactive application for exploring and analyzing Netflix's 10-K filings us
 
 ## Technologies Used
 
-* LangChain for RAG implementation
-* OpenAI for embeddings and language model
-* Pinecone for vector storage
-* Streamlit for the user interface
-* Python 3.10+
-* Unstructured API for document processing
+## Technologies Used
+- **Unstructured MCP** for no-code document processing and RAG pipeline setup
+- Streamlit for the user interface
+- Pinecone for vector storage
+- OpenAI for embeddings and language model
+- Python 3.10+
 
 ## Setting Up the RAG Application
 
